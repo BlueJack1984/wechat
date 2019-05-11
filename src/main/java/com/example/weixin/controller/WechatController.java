@@ -8,10 +8,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletResponse;
 import java.io.IOException;
@@ -40,7 +37,6 @@ public class WechatController {
      * 这个sdk的使用在mp模块主要有两个类（不清楚的可以上github看文档）
      * WxMpService；WxMpConfigStorage；
      * 下面是在springboot里的配置
-     * @param response
      * @param timestamp
      * @param nonce
      * @param signature
@@ -48,21 +44,17 @@ public class WechatController {
      * 代码setToken实际上是去做了我们第一步的checkSignature（）；
      */
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public void check(ServletResponse response, String timestamp, String nonce, String signature, String echostr) throws Exception {
+    @ResponseBody
+    public String check(@RequestParam("signature") String signature,
+                        @RequestParam("timestamp") String timestamp,
+                        @RequestParam("nonce") String nonce,
+                        @RequestParam("echostr") String echostr) throws Exception {
         if (! wxMpService.checkSignature(timestamp, nonce, signature)) {
-            log.error("不合法");
-            //throw new SellException(ResultEnum.WECHAT_ERROR);
-            throw new Exception("微信公众号验证不合法");
+            log.error("微信公众号签名校验失败");
+            //throw new Exception("微信公众号签名校验失败");
+            return "";
         }
-        PrintWriter o = null;
-        try {
-            o = new PrintWriter(response.getWriter());
-            o.print(echostr);
-        } catch (IOException e) {
-            log.error("写回微信端错误{}", e.getMessage());
-        } finally {
-            o.close();
-        }
+        return echostr;
     }
 
     /**
