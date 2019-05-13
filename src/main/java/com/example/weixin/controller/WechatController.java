@@ -43,7 +43,7 @@ public class WechatController {
      * @param echostr
      * 代码setToken实际上是去做了我们第一步的checkSignature（）；
      */
-    @RequestMapping(value = "/check", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public String check(@RequestParam("signature") String signature,
                         @RequestParam("timestamp") String timestamp,
@@ -54,6 +54,7 @@ public class WechatController {
             //throw new Exception("微信公众号签名校验失败");
             return "";
         }
+        System.out.println("微信获取签名成功");
         return echostr;
     }
 
