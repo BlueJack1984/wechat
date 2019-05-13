@@ -60,7 +60,7 @@ public class WechatController {
     /**
      * 当我们通过验证后
      * 就编写对应的controller就好了
-     * 看看我们的代码
+     * xxx.natapp.cn/wechat/authorize?returnUrl='回调的地址'
      * @param returnUrl
      * @return
      */
@@ -87,6 +87,6 @@ public class WechatController {
         log.info("openid{}", openId);
         log.info("enter");
         log.info("return url{}", returnUrl);
-        return "redirect:" + "https://www.imooc.com/" + "?openid=" + openId;
+        return "redirect:" + returnUrl + "?openid=" + openId;
     }
 }
