@@ -2,9 +2,7 @@ package com.example.weixin.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
@@ -13,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
 
-    @GetMapping("/get")
-    public String get() {
-        return "hello order";
+    @GetMapping("/get/{name}")
+    public String get(@PathVariable("name") String name) {
+        return "hello order " + name;
+    }
+
+    @PostMapping("/save/{name}")
+    public String save(@PathVariable("name") String name) {
+        return "the post order " + name;
     }
 }

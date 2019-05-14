@@ -42,6 +42,10 @@ public class WechatController {
      * @param signature
      * @param echostr
      * 代码setToken实际上是去做了我们第一步的checkSignature（）；
+     * 只有在验证URL的时候查询字符串中才会有“echostr”这个字段，验证的方法是
+     * 将token、timestamp、nonce三个参数进行字典序排序
+     * 将三个参数字符串拼接成一个字符串进行sha1加密
+     * 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
@@ -62,6 +66,8 @@ public class WechatController {
      * 当我们通过验证后
      * 就编写对应的controller就好了
      * xxx.natapp.cn/wechat/authorize?returnUrl='回调的地址'
+     * String returnurl = URLEncoder.encode("http://sdfa.com/sfads/?sfd=324&sfa=24", "UTF-8");
+     * String url = "http://http://xxx.com/abc/?a=1&b=2&returnurl=" + returnurl;
      * @param returnUrl
      * @return
      */
