@@ -91,6 +91,8 @@ public class WechatController {
             throw new Exception(e.getError().getErrorMsg());
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        //String accessToken = wxMpOAuth2AccessToken.getAccessToken();
+        //log.info("accessToken{}", accessToken);
         log.info("openid{}", openId);
         log.info("enter");
         log.info("return url{}", returnUrl);

@@ -1,5 +1,7 @@
 package com.example.weixin.controller;
 
+import com.example.weixin.entity.Item;
+import com.example.weixin.entity.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,10 @@ public class OrderController {
         return "hello order " + name;
     }
 
-    @PostMapping("/save/{name}")
-    public String save(@PathVariable("name") String name) {
-        return "the post order " + name;
+    @GetMapping("/save/{name}")
+    public Order save(@PathVariable("name") String name) {
+        Item item = new Item(1L, "book", 25.5, "java");
+        Order order = new Order(10000L, name, item);
+        return order;
     }
 }
