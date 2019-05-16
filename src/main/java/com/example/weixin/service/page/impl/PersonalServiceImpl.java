@@ -4,7 +4,12 @@ import com.example.weixin.entity.CourseSchedule;
 import com.example.weixin.entity.Hardware;
 import com.example.weixin.entity.Order;
 import com.example.weixin.entity.User;
+import com.example.weixin.service.base.ICourseSerivce;
+import com.example.weixin.service.base.IOrderService;
+import com.example.weixin.service.base.IUserService;
+import com.example.weixin.service.page.IHardwareService;
 import com.example.weixin.service.page.IPersonalService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +20,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class PersonalServiceImpl implements IPersonalService {
 
+    private final IUserService userService;
+    private final ICourseSerivce courseSerivce;
+    private final IHardwareService hardwareService;
+    private final IOrderService orderService;
     /**
      * 获取我的课程进度
      * @param userId 表示用户id
@@ -25,6 +35,7 @@ public class PersonalServiceImpl implements IPersonalService {
     @Override
     public CourseSchedule getCourseSchedule(Long userId, Long courseId) {
         //http协议调用后台获取
+        userService
         return null;
     }
 
