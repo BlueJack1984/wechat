@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>小AI课堂</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+<!--    <link rel="icon" type="image/png" href="../../static/assets/i/favicon.png">-->
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+<!--    <link rel="stylesheet" href="assets/css/amazeui.min.css">-->
+    <link rel="stylesheet" href="../../assets/css/Land.css">
+    <link rel="stylesheet" href="../../assets/css/index.css">
+<!--    <script src="../assets/js/url.js"></script>-->
+<!--    <script src="assets/js/methods.js"></script>-->
+</head>
+<body>
+    <div class="home_item_dl">
+        <form action="" method="POST">
+            <div class="home_item_dl_btn">
+                <div class="home_dl_btn home_item_zc_app"></div>
+            </div>
+            <div>
+                <img src="../../assets/i/less/5.png" alt="">
+                <input type="text" class="home_item_dl_uname" placeholder="请输入用户名">
+            </div>
+            <!-- <div>
+                <img src="assets/i/less/6.png" alt="">
+                <input type="text" class="home_item_dl_phone" placeholder="请输入手机号">
+            </div> -->
+            <div>
+                <img src="../../assets/i/less/7.png" alt="">
+                <input type="password" class="home_item_dl_upwe" placeholder="请输入密码">
+            </div>
+            <button class="dl_btn"></button>
+        </form>
+    </div>
+    <script src="../../assets/js/jquery-1.7.2.min.js"></script>
+    <script>
+        $('.dl_btn').on('click',function(e){
+    e.preventDefault();
+    $uname = $('.home_item_dl_uname')[0].value;
+    $password = $('.home_item_dl_upwe')[0].value;
+    var data = {
+        password: $password,
+        account: $uname
+    }
+
+    $.ajax({
+        async:false,
+        type: "POST",
+        url: url+"/student/studentlogin",
+        data: JSON.stringify(data),
+        contentType : 'application/json',
+        dataType: "json",
+        success: function (data) {
+             console.log(data)
+             sessionStorage.setItem('studentId',data.data.studentId)
+            // 登陆是否成功成功跳转studentclass.html
+            if(data.code==1){
+                if(data.data.status=='2'){
+                     localStorage.lastname = '游客'
+                }else{
+                    sessionStorage.setItem('name',data.data.name)
+
+                }
+                
+                $(window).attr('location','studentclass.html');
+            }else{
+                alert('密码或用户名不对')
+            }
+            
+        }
+    });
+})
+    </script>
+
+</body>
+</html>

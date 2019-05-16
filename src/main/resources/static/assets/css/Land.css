@@ -1,0 +1,220 @@
+.home_item_dl,.home_item_zc{
+    width: 420px;
+    height: 560px;
+    position: absolute;
+    top:36%;
+    /* left: 36%; */
+    /* background:#fff; */
+    border-radius: 8px;
+    text-align: center;
+    background-image:url(../i/less/3.png);
+    background-size:100% 100%; 
+    /* display: none; */
+    right: 11%;
+}
+.home_item_zc{
+   background-image:url(../i/less/4.png);
+}
+.home_item_dl_btn{
+   justify-content:flex-end;
+   margin-top:4%;
+}
+.home_dl_btn,.home_zc_btn{
+   width: 50%;
+   z-index: 11111;
+}
+.home_item_dl_uname,.home_item_dl_upwe,.home_item_zc_ipone,.home_item_zc_upwd,.home_item_zc_uname,.home_item_zc_uqrpwd,.home_item_dl_phone{
+   width: 81%;
+   height: 13%;
+   border-radius: 40px;
+   padding-left: 8%;
+   /* background: #f8f8f8; */
+   border: 1px solid #fff;
+   display: block;
+   /* margin-left: 10%; */
+   /* margin-bottom: 18px; */
+}
+.home_item_dl_btn,.home_item_zc_btn{
+   border:0px;
+   margin-bottom: 14%;
+   margin-left: 6%;
+   width: 92%
+}
+.home_item_dl_uname,.home_item_zc_ipone{
+   margin-top: 1%;
+}
+.home_item_dl_upwe{
+   margin-top:1%; 
+}
+form>div{
+   display: flex;
+   margin-left: 19%;
+   height: 6%;
+   width: 61%;
+   margin-top: 6%;
+   margin-bottom: 7%;
+   border-bottom: 1px solid #f4f4f4;
+}
+.home_item_dl form>div>input{
+   width: 85%;
+   height: 89%;
+   
+}
+.home_item_dl form>div>p{
+   margin-right: 28%;
+   font-size: 15px;
+}
+.home_item_dl form>div>a{
+   color: #000;
+   font-size: 15px;
+}
+.home_item_dl form,.home_item_zc form{
+   width: 100%;
+   height: 100%;;
+}
+.home_item_dl form button{
+   background-image: url(../i/less/1.png);
+   background-size:100% 100%; 
+   width: 60%;
+   height: 10%;
+   color: #fff;
+   border:1px solid #fff;
+   border-radius: 40px;
+   margin-top:20%;; 
+}
+.zc_btn{
+  background-image: url(../i/less/2.png);
+  background-size:100% 100%; 
+   width: 60%;
+   height: 10%;
+   color: #fff;
+   border:1px solid #fff;
+   border-radius: 40px;
+   margin-top:11%;
+}
+
+.home_item_box.item5{
+   background: rgb(111, 111, 111);
+   height: 254px;
+   display: flex;
+   padding-top:50px; 
+   margin-top: 5%;
+}
+.home_item_box.item5 a{
+   color: #cdcdcd;
+}
+.home_item_box_ul{
+   display: flex;
+   height: 240px;
+   margin-left:20%;
+   margin-right: 50px;
+   /* border-bottom:1px solid #828181; */
+   width: 43%;
+}
+.home_item_box_ul li{
+   /* margin-top:9px; */
+   /* font-weight: bold; */
+   font-size: 16px;
+   line-height: 30px;
+   color: #cbcbcb;
+   
+}
+.home_item_box_ul ul:nth-child(1) li{
+   width: 76px;
+}
+.home_item_box_ul ul:nth-child(2) li{
+   width: 76px;
+}
+.home_item_box_ul ul{
+   margin-right:66px;
+   padding: 0 
+}
+.home_item_box_ul ul:nth-child(1){
+   margin-top: 19px;
+}
+.home_item_box.item5 div:nth-child(2) img{
+   width: 145px;
+   height: 145px;
+}
+.home_item_float{
+   text-align: center;
+   background: rgb(111, 111, 111);
+   color: #b7bbbe;
+   /* padding-left: 20%; */
+   font-size: 11px;
+   padding-bottom: 10px;
+}
+/* .dl{
+   position: absolute;
+   top: 0px;
+   right: 22px;
+   color: #fff;
+   font-size: 20px;
+} */
+.dl_div{
+   position: absolute;
+   top: 0px;
+   right: 0;
+   color: #fff;
+   font-size: 20px;
+   display: flex;
+   width: 100%;
+   height: 48px;
+   justify-content: space-between;
+}
+.dl{
+   right: 0;
+   margin-right: 4%;
+   position: top;
+   position: absolute;
+   top: 58%;
+
+}
+.index_logo>div:nth-child(1){
+   margin-top: 28px;
+   margin-left: 27px;
+   width: 106px;
+   height: 37px;
+
+}
+.dl_div img{
+   width:100%;
+   height: 100%;
+}
+.dl_div img{
+   width: 100%;
+   height: 100%;
+}
+
+/* 注册 */
+/* .home_item_zc div{
+   width: 100%;
+   height: 17%;
+   margin-left:10%; 
+} */
+.home_item_zc div input{
+   width: 89%;
+   height: 79%;
+   border-radius: 40px;
+   padding-left: 8%;
+   /* background: #f8f8f8; */
+   border: 1px solid #fff;
+}
+.home_item_zc div button{
+   width: 31%;
+   height: 79%;
+   border: #656565;
+   background: #cbc5c9;
+   border: 1px solid #fff;
+   font-size: 15px;
+}
+
+.home_item_dl_app a{
+   color: #000;
+   margin-left: 30%;
+}
+.dl_div .index_logo{
+   height: 92px;
+   width: 160px;
+   background: #ff9400;
+}
