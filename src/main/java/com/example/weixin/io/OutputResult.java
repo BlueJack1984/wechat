@@ -2,13 +2,14 @@ package com.example.weixin.io;
 
 import lombok.Data;
 
-@Data
-public class HttpResult<T> {
+import java.io.Serializable;
 
+@Data
+public class OutputResult<T> implements Serializable {
     /**
      * 返回的状态码
      */
-    private Integer code;​​​​​​​
+    private Integer code;
     /**
      * 返回的信息
      */
@@ -18,18 +19,25 @@ public class HttpResult<T> {
      */
     private T data;
 
-    public HttpResult() {
+    /**
+     * 请求成功，无数据返回
+     */
+    public OutputResult() {
         this.code = 200;
         this.message = "SUCCESS";
     }
-
-    public HttpResult(T data) {
+    /**
+     * 请求成功，有数据返回
+     */
+    public OutputResult(T data) {
         this.code = 200;
         this.message = "SUCCESS";
         this.data = data;
     }
-
-    public HttpResult(Integer code, String message) {
+    /**
+     * 请求失败，返回失败信息
+     */
+    public OutputResult(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

@@ -5,9 +5,9 @@ import com.example.weixin.entity.Hardware;
 import com.example.weixin.entity.Order;
 import com.example.weixin.entity.User;
 import com.example.weixin.service.base.ICourseSerivce;
+import com.example.weixin.service.base.IHardwareService;
 import com.example.weixin.service.base.IOrderService;
 import com.example.weixin.service.base.IUserService;
-import com.example.weixin.service.page.IHardwareService;
 import com.example.weixin.service.page.IPersonalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class PersonalServiceImpl implements IPersonalService {
     @Override
     public CourseSchedule getCourseSchedule(Long userId, Long courseId) {
         //http协议调用后台获取
-        userService
+        //userService
         return null;
     }
 

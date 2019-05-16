@@ -7,5 +7,5 @@ import com.example.weixin.entity.CourseSchedule;
  */
 public interface ICourseSerivce {
 
-    CourseSchedule get
+    //CourseSchedule get
 }
