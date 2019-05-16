@@ -1,6 +1,7 @@
 package com.example.weixin.controller.security;
 
-import com.example.weixin.io.request.UserInput;
+import com.alibaba.fastjson.JSONObject;
+import com.example.weixin.io.request.LoginInput;
 import com.example.weixin.utils.HttpUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,12 @@ public class SecurityController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody @Valid UserInput userInput) {
+    public String login(@RequestBody @Valid LoginInput loginInput) {
 
+        String loginInfo = JSONObject.toJSONString(loginInput);
 
+        String result = HttpUtil.post("https://www.baidu.com", loginInfo);
 
-        HttpUtil.post("https://www.baidu.com");
 
     }
 }

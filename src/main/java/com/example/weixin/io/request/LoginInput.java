@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInput {
+public class LoginInput {
 
     /**
      * 用户输入账号
