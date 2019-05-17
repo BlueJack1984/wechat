@@ -1,4 +1,4 @@
-package com.example.weixin.io;
+package com.example.weixin.io.response;
 
 import lombok.Data;
 
