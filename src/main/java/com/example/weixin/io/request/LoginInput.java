@@ -24,4 +24,10 @@ public class LoginInput {
     @NotBlank(message = "用户密码不能为空")
     @Length(min = 1, max = 20)
     private String password;
+
+    /**
+     * 登录后需要跳转地址
+     */
+    @NotBlank(message = "跳转地址不能为空")
+    private String destinationUrl;
 }

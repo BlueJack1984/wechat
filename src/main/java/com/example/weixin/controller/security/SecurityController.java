@@ -1,14 +1,20 @@
 package com.example.weixin.controller.security;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.weixin.entity.User;
 import com.example.weixin.io.request.LoginInput;
-import com.example.weixin.utils.HttpUtil;
+import com.example.weixin.utils.HttpClientUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -16,6 +22,15 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityController {
+
+    /**
+     * 注入http调用工具
+     */
+    private final HttpClientUtil httpClientUtils;
+    /**
+     * 设置后台登录url
+     */
+    private static final String LOGIN_URL = "http://localhost:80/order/login";
 
     @GetMapping("/page")
     public String getLoginPage() {
@@ -28,22 +43,36 @@ public class SecurityController {
      * @return
      */
     @PostMapping("/login")
-    public String login(@RequestBody @Valid LoginInput loginInput) {
+    @CrossOrigin
+    public String login(@RequestBody @Valid LoginInput loginInput, HttpServletRequest request) {
 
-        String loginInfo = JSONObject.toJSONString(loginInput);
-
-        String result = HttpUtil.post("https://www.baidu.com", loginInfo);
-        if (currentUser == null) {
-            //登录失败
-            req.setAttribute("errorMsg", "亲,账户或者密码错误");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
-            return "";
-        } else {
-            //登录成功
-            req.getSession().setAttribute("USER_IN_SESSION", currentUser);
-            resp.sendRedirect("/employee");
-            return "";
+        Map<String, Object> map = new HashMap<>();
+        map.put("account", loginInput.getAccount());
+        map.put("password", loginInput.getPassword());
+        HttpClientUtil.HttpResponse httpResponse = null;
+        try {
+            httpResponse = httpClientUtils.doPost(LOGIN_URL, map);
+        } catch (Exception e) {
+            request.setAttribute("message", "后台登录服务无法使用");
+            return "/login.html";
         }
+        String result = null;
+        if (200 == httpResponse.getCode()) {
+            result = httpResponse.getBody();
+            if (null != result) {
+                JSONObject userJson = JSONObject.parseObject(result);
+                User user = JSON.toJavaObject(userJson, User.class);
+                if(null == user) {
+                    request.setAttribute("message", "账户或者密码错误");
+                    return "/login.html";
+                }
+                //登录成功
+                request.getSession().setAttribute("USER_IN_SESSION", user);
+                return "redirect:" + loginInput.getDestinationUrl();
+            }
+        }
+        request.setAttribute("message", "后台登录服务请求状态值code不正确");
+        return "/login.html";
     }
 
     /**
@@ -53,26 +82,19 @@ public class SecurityController {
      *1.删除当前登录的用户信息
      *存在问题:本次会话的其他信息还是保存在内存中,没有及时清理
      */
-    @PostMapping("/logout")
-    public class LogoutServlet extends HttpServlet {
-        private IEmployeeService service = new EmployeeServiceImpl();
-        protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getSession().removeAttribute("USER_IN_SESSION");
-            resp.sendRedirect("/login.jsp");
-        }
-    }
+//    @PostMapping("/logout")
+//    public String logout(HttpServletRequest request, HttpServletResponse response) {
+//        request.getSession().removeAttribute("USER_IN_SESSION");
+//        return "redirect:/login.html";
+//    }
 
     /**
      * 销毁整个session(推荐)
      */
-
-    @WebServlet("/logout")
-    public class LogoutServlet extends HttpServlet {
-        private IEmployeeService service = new EmployeeServiceImpl();
-        protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getSession().invalidate();
-            resp.sendRedirect("/login.jsp");
-        }
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().invalidate();
+        return "redirect:/login.html";
     }
 }
 

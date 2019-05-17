@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.weixin.entity.Item;
 import com.example.weixin.entity.Order;
-import com.example.weixin.utils.HttpUtil;
+import com.example.weixin.entity.User;
+import com.example.weixin.io.request.LoginInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,9 @@ public class OrderController {
 
     @GetMapping("/http")
     public String check() {
-        return HttpUtil.get("https://www.baidu.com");
+        return null;
     }
+
     @PostMapping("/post")
     public String httpcheck() {
         String orderStr = "{\"id\":1,\"name\":\"lz\"}";
@@ -39,5 +41,13 @@ public class OrderController {
         Order order = JSON.toJavaObject(orderJson, Order.class);
         System.out.println(order.getItem());
         return JSONObject.toJSONString(order);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody LoginInput loginInput) {
+        User user = new User();
+        user.setName(loginInput.getAccount());
+        user.setPassword(loginInput.getPassword());
+        return user;
     }
 }
